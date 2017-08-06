@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include <Arduino.h>
-#include "AMATools.hpp"
 #include "AMADefines.h"
+#include "AMATools.hpp"
 
 namespace AMACar
 {
@@ -12,12 +12,7 @@ namespace AMACar
      * Represents a data bus
      */
     class AMAOutputDataBus
-    {
-        /*
-         * Flag which shows if build() method was called
-         */
-        bool built;
-        
+    {        
         /*
          * Holds bus pins
          */
@@ -32,7 +27,7 @@ namespace AMACar
         /*
          * Default constructor
          */
-        AMAOutputDataBus(void);
+        AMAOutputDataBus(int n, ...);
     
         /*
          * Set a value (bases 2, 8, 10, 16) value on databus
@@ -48,16 +43,6 @@ namespace AMACar
          * Sets all pins to HIGH
          */
         void setAllHigh();
-    
-        /*
-         * Adds a pin to bus pins
-         */
-        AMAOutputDataBus* addPin(byte pin);
-        
-        /*
-         * Allows the buffer to be used
-         */
-         AMAOutputDataBus* build();
     
          #if __DEBUG__
          /*

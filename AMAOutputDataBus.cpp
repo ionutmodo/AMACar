@@ -5,11 +5,19 @@ using namespace AMACar;
 /*
  * Default constructor
  */
-AMAOutputDataBus::AMAOutputDataBus(void)
+AMAOutputDataBus::AMAOutputDataBus(int n, ...)
 {
-    this->built = false;
-    this->busSize = 0;
-    this->busPins = new byte[__ARDUINO_UNO_PINS_COUNT__];
+    this->busSize = (byte) n;
+    busPins = new byte[n];
+    va_list list;
+    va_start(list, n);
+    int x;
+    for(int i = 0; i < n; ++i)
+    {
+        x = va_arg(list, int);
+        busPins[i] = (byte) x;
+    }
+    va_end(list);
 }
 
 /*
@@ -17,13 +25,10 @@ AMAOutputDataBus::AMAOutputDataBus(void)
  */
 void AMAOutputDataBus::setValue(byte value)
 {
-    if(built)
+    for(int i = this->busSize - 1; 0 <= i; --i)
     {
-        for(int i = this->busSize - 1; 0 <= i; --i)
-        {
-            digitalWrite(busPins[i], value & 1);
-            value >>= 1;
-        }
+        digitalWrite(busPins[i], value & 1);
+        value >>= 1;
     }
 }
 
@@ -43,40 +48,12 @@ void AMAOutputDataBus::setAllHigh()
     setValue(HIGH);
 }
 
-/*
- * Adds pins to pin arrays
- */
-AMAOutputDataBus* AMAOutputDataBus::addPin(byte pin)
-{
-    if(!built && busSize < __ARDUINO_UNO_PINS_COUNT__)
-    {
-        busPins[busSize++] = pin;
-        return this;
-    }
-    return NULL;
-}
-
-/*
- * Allows the buffer to be used
- */
-AMAOutputDataBus* AMAOutputDataBus::build()
-{
-    built = true;
-    for(byte i = 0; i < busSize; ++i)
-    {
-        pinMode(busPins[i], OUTPUT);
-    }
-    return this;
-}
-
 #if __DEBUG__
 /*
  * Prints the state of the object on the serial monitor if debug mode is activated
  */
 void AMAOutputDataBus::printState()
 {
-    Serial.print("Built = ");
-    Serial.println(built);
     Serial.print("BusSize = ");
     Serial.println(busSize);
     for(byte i = 0; i < busSize; ++i)
