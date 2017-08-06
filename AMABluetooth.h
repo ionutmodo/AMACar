@@ -2,13 +2,15 @@
 #define __AMABluetooth__
 
 #include <SoftwareSerial.h>
+#include "AMADefines.h"
+#include "AMATools.hpp"
 
 namespace AMACar
 {
     class AMABluetooth
     {
     private:
-        SoftwareSerial *bluetooth;
+        SoftwareSerial *bluetoothSerial;
     public:
         AMABluetooth(byte rxPin, byte txPin);
         void send(byte data);
