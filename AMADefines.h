@@ -12,5 +12,8 @@
 #define HALF_SECOND 500
 #define ONE_SECOND 1000
 
+#define MOTOR_FORWARD  B10
+#define MOTOR_BACKWARD B01
 
+#define DEFAULT_BAUD_RATE 19200
 #endif
