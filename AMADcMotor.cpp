@@ -23,7 +23,7 @@ void AMADcMotor::setDutyCycle(byte dutyCycle)
 /*
  * Sets the direction of the motor
  */
-void AMADcMotor::setDirection(AMAMotorDirection motorDirection)
+void AMADcMotor::setDirection(byte motorDirection)
 {
     directionBus->setValue(motorDirection);
 }

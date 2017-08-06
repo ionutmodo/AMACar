@@ -3,9 +3,8 @@
 
 #include "AMAPWM.h"
 #include "AMAOutputDataBus.h"
-
-#define MOTOR_FORWARD  B10
-#define MOTOR_BACKWARD B01
+#include "AMADefines.h"
+#include "AMATools.hpp"
 
 namespace AMACar
 {
@@ -38,7 +37,7 @@ namespace AMACar
         /*
          * Sets the direction of the motor
          */
-        void setDirection(AMAMotorDirection motorDirection);
+        void setDirection(byte motorDirection);
     };
 }
 
