@@ -17,15 +17,12 @@ AMAPWM::AMAPWM(byte pin, byte dutyCycle)
  */
 void AMAPWM::setPin(byte pin)
 {
-    if(AMATools::isValidPWMPin(pin))
+    if(this->pin != pin)
     {
-        if(this->pin != pin)
-        {
-            digitalWrite(this->pin, LOW);
-            this->pin = pin;
-            pinMode(pin, OUTPUT);
-            generate();
-        }
+        digitalWrite(this->pin, LOW);
+        this->pin = pin;
+        pinMode(pin, OUTPUT);
+        generate();
     }
 }
 

@@ -1,6 +1,7 @@
 #ifndef __AMAPWM__
 #define __AMAPWM__
 
+//#include "AMADefines.h"
 #include "AMATools.hpp"
 
 namespace AMACar
@@ -46,3 +47,4 @@ namespace AMACar
 }
 
 #endif
+
