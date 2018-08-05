@@ -27,7 +27,7 @@ namespace AMACar
         /*
          * Initializes a DC motor controller with to control a motor on specified 
          */
-    	AMADcMotor(byte pwmPin, byte dutyCycle, AMAOutputDataBus *directionBus);
+    	AMADcMotor(byte pwmPin, byte pwmDutyCycle, int busPinsCount, int *busPinsArray);
     
         /*
          * Sets the duty cycle to control turation
@@ -37,7 +37,7 @@ namespace AMACar
         /*
          * Sets the direction of the motor
          */
-        void setDirection(byte motorDirection);
+        void setMovement(byte newMotorMovement);
     };
 }
 

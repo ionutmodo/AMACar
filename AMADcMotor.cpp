@@ -5,10 +5,10 @@ using namespace AMACar;
 /*
  * Initializes a DC motor controller with to control a motor on specified 
  */
-AMADcMotor::AMADcMotor(byte pwmPin, byte dutyCycle, AMAOutputDataBus *directionBus)
+AMADcMotor::AMADcMotor(byte pwmPin, byte pwmDutyCycle, int busPinsCount, int *busPinsArray)
 {
-    this->directionBus = directionBus;
-    this->pwm = new AMAPWM(pwmPin, dutyCycle);
+	this->directionBus = new AMAOutputDataBus(busPinsCount, busPinsArray);
+    this->pwm = new AMAPWM(pwmPin, pwmDutyCycle);
     this->pwm->generate();
 }
 
@@ -17,14 +17,14 @@ AMADcMotor::AMADcMotor(byte pwmPin, byte dutyCycle, AMAOutputDataBus *directionB
  */
 void AMADcMotor::setDutyCycle(byte dutyCycle)
 {
-    pwm->setDutyCycle(dutyCycle);
+    this->pwm->setDutyCycle(dutyCycle);
 }
 
 /*
  * Sets the direction of the motor
  */
-void AMADcMotor::setDirection(byte motorDirection)
+void AMADcMotor::setMovement(byte newMotorMovement)
 {
-    directionBus->setValue(motorDirection);
+	this->directionBus->setValue(newMotorMovement);
 }
 
