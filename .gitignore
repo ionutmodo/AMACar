@@ -1,0 +1,6 @@
+.vs
+*.sln
+__vm
+Debug
+*vcxproj*
+.gitattributes
