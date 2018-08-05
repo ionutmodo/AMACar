@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <Arduino.h>
 #include "AMADefines.h"
-#include "AMATools.hpp"
 
 namespace AMACar
 {
@@ -27,7 +26,7 @@ namespace AMACar
         /*
          * Default constructor
          */
-        AMAOutputDataBus(int n, ...);
+        AMAOutputDataBus(int pinsCount, int *busPins);
     
         /*
          * Set a value (bases 2, 8, 10, 16) value on databus
@@ -44,12 +43,10 @@ namespace AMACar
          */
         void setAllHigh();
     
-         #if __DEBUG__
          /*
           * Prints the state of the object on the serial monitor if debug mode is activated
           */
          void printState();
-         #endif
     };
 }
 

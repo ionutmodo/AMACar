@@ -5,19 +5,12 @@ using namespace AMACar;
 /*
  * Default constructor
  */
-AMAOutputDataBus::AMAOutputDataBus(int n, ...)
+AMAOutputDataBus::AMAOutputDataBus(int pinsCount, int *busPins)
 {
-    this->busSize = (byte) n;
-    busPins = new byte[n];
-    va_list list;
-    va_start(list, n);
-    int x;
-    for(int i = 0; i < n; ++i)
-    {
-        x = va_arg(list, int);
-        busPins[i] = (byte) x;
-    }
-    va_end(list);
+    this->busSize = (byte)pinsCount;
+    this->busPins = new byte[pinsCount];
+	for (int i = 0; i < pinsCount; ++i)
+		this->busPins[i] = busPins[i];
 }
 
 /*
@@ -27,7 +20,7 @@ void AMAOutputDataBus::setValue(byte value)
 {
     for(int i = this->busSize - 1; 0 <= i; --i)
     {
-        digitalWrite(busPins[i], value & 1);
+        digitalWrite(this->busPins[i], value & 1);
         value >>= 1;
     }
 }
@@ -48,9 +41,8 @@ void AMAOutputDataBus::setAllHigh()
     setValue(HIGH);
 }
 
-#if __DEBUG__
 /*
- * Prints the state of the object on the serial monitor if debug mode is activated
+ * Prints the state of the object on the serial monitor
  */
 void AMAOutputDataBus::printState()
 {
@@ -61,8 +53,7 @@ void AMAOutputDataBus::printState()
         Serial.print("Pin#");
         Serial.print(i);
         Serial.print(" = ");
-        Serial.println(busPins[i]);
+        Serial.println(this->busPins[i]);
     }
     Serial.println();
 }
-#endif
