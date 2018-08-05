@@ -1,29 +1,50 @@
-#include "AMAOutputDataBus.h"
+/*
+ * 30% - cea mai mica viteza
+ * 100% - cea mai mare viteza
+ * 0, 1, 2 - stanga dreapta
+ */
+
 #include "AMADefines.h"
 #include "AMADcMotor.h"
-#include "AMAPWM.h"
+#include "AMAServoMotor.h"
 
 using namespace AMACar;
 
-AMADcMotor *dcMotor = NULL;
-byte dutyCycle;
-
-//AMAPWM *pwm = new AMAPWM(9, 25);
+AMADcMotor *motor = NULL;
+AMAServoMotor *servo = NULL;
+int speed = 0;
 
 void setup()
 {
-    dutyCycle = 0;
-    dcMotor = new AMADcMotor(9, 50, (new AMAOutputDataBus())->addPin(8)->addPin(7)->build());
-    dcMotor->setDirection(MOTOR_FORWARD);
     Serial.begin(9600);
-    //pwm->generate();
+    delay(10);
+	motor = new AMADcMotor(DC_MOTOR_PWM_PIN, 50, 2, new int[2] { DC_MOTOR_BUS_PIN_MSB, DC_MOTOR_BUS_PIN_LSB });
+	motor->setMovement(DC_MOTOR_FORWARD);
+
+	servo = new AMAServoMotor(SERVO_MOTOR_PWM_PIN);
+	servo->setDirection(SERVO_MOTOR_FRONT);
+
+    Serial.println("running loop");
 }
 
 void loop()
 {
-    if(Serial.available())
+    if(Serial.available() > 0)
     {
-        char c = Serial.read();
-        dcMotor->setDutyCycle((c - '0') * 10);
+      speed = (Serial.read() - '0');
+      if(speed < 3)
+      {
+        Serial.print("dir=");
+        Serial.println(speed * 90);
+        servo->setDirection(speed * 90);
+      }
+      else
+      {
+        speed = (speed + 1) * 10;
+		motor->setDutyCycle(speed);
+
+        Serial.print("spd=");
+        Serial.println(speed);
+      }
     }
 }
