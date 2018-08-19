@@ -3,7 +3,7 @@
 
 #include <SoftwareSerial.h>
 #include "AMADefines.h"
-#include "AMATools.hpp"
+#include <Arduino.h>
 
 namespace AMACar
 {
@@ -12,10 +12,10 @@ namespace AMACar
     private:
         SoftwareSerial *bluetoothSerial;
     public:
-        AMABluetooth(byte rxPin, byte txPin);
+        AMABluetooth(byte arduinoRXPin, byte arduinoTXPin);
         void send(byte data);
         void send(String string);
-        byte receive(void);
+        int receive(void);
     };
 }
 

@@ -2,9 +2,9 @@
  
 using namespace AMACar;
 
- AMABluetooth::AMABluetooth(byte rxPin, byte txPin)
+ AMABluetooth::AMABluetooth(byte arduinoRXPin, byte arduinoTXPin)
  {
-    bluetoothSerial = new SoftwareSerial(rxPin, txPin);
+    bluetoothSerial = new SoftwareSerial(arduinoRXPin, arduinoTXPin);
     bluetoothSerial->begin(DEFAULT_BAUD_RATE);
  }
  
@@ -20,10 +20,10 @@ void AMABluetooth::send(String string)
         send(string[i]);
 }
 
-byte AMABluetooth::receive(void)
+int AMABluetooth::receive(void)
 {
     if(bluetoothSerial->available())
         return bluetoothSerial->read();
-    return '\0';
+    return NULL;
 }
 
