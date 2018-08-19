@@ -4,7 +4,6 @@
 #include "AMAPWM.h"
 #include "AMAOutputDataBus.h"
 #include "AMADefines.h"
-#include "AMATools.hpp"
 
 namespace AMACar
 {
