@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Servo.h>
+#include "AMADefines.h"
 
 namespace AMACar
 {

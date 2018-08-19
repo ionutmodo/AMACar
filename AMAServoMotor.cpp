@@ -1,5 +1,7 @@
 #include "AMAServoMotor.h"
 
+using namespace AMACar;
+
 /*
  * Initializes a servo motor to be controlled through a specific pin
  */
