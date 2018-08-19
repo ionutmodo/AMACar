@@ -1,6 +1,10 @@
 #ifndef __AMADefines__
 #define __AMADefines__
 
+#include <Arduino.h>
+
+typedef unsigned char byte;
+
 #define HALF_SECOND 500
 #define ONE_SECOND 1000
 
@@ -16,6 +20,17 @@
 #define SERVO_MOTOR_RIGHT 0
 #define SERVO_MOTOR_PWM_PIN 9
 
+#define ARDUINO_BT_PIN_TX 11
+#define ARDUINO_BT_PIN_RX 12
+
 #define DEFAULT_BAUD_RATE 19200
+
+// arduino duty cycle min/max percents
+#define CAR_SPEED_LOWEST_PERCENT 30
+#define CAR_SPEED_HIGHEST_PERCENT 100
+
+// android seek bar min/max values
+#define CAR_SPEED_LOWEST_VALUE 0
+#define CAR_SPEED_HIGHEST_VALUE 10
 
 #endif
