@@ -19,8 +19,8 @@ int cmd, dutyCycle, servoIndex, motorIndex;
 ulong time_last_command;
 
 int *directionPins = new int[2]{ DC_MOTOR_BUS_PIN_MSB, DC_MOTOR_BUS_PIN_LSB };
-byte *servoDirs = new int[3] { SERVO_MOTOR_LEFT, SERVO_MOTOR_FRONT, SERVO_MOTOR_RIGHT };
-byte *motorDirs = new int[3] { DC_MOTOR_FORWARD, DC_MOTOR_STOP, DC_MOTOR_BACKWARD };
+byte *servoDirs = new byte[3] { SERVO_MOTOR_LEFT, SERVO_MOTOR_FRONT, SERVO_MOTOR_RIGHT };
+byte *motorDirs = new byte[3] { DC_MOTOR_FORWARD, DC_MOTOR_STOP, DC_MOTOR_BACKWARD };
 
 bool between(int a, int x, int b);
 int minValue(int x, int y);
@@ -82,7 +82,7 @@ void loop()
 	if (cmd != -1)
 	{
 		time_last_command = millis();
-		else if (between(CAR_SPEED_LOWEST_VALUE, cmd, CAR_SPEED_HIGHEST_VALUE)) // speed command
+		if (between(CAR_SPEED_LOWEST_VALUE, cmd, CAR_SPEED_HIGHEST_VALUE)) // speed command
 		{
 			//map(value, fromLow, fromHigh, toLow, toHigh)
 			dutyCycle = map(cmd,
@@ -127,7 +127,7 @@ void loop()
 		}
 	}
 	// stop car when time between two consecutive commands is higher than predefined threshold
-	if(millis() - time_last_comand > TIMEOUT_BETWEEN_COMMANDS_MS)
+	if(millis() - time_last_command > TIMEOUT_BETWEEN_COMMANDS_MS)
 	{
 		stopCar();
 	}

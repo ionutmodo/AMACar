@@ -11,7 +11,7 @@ AMAServoMotor::AMAServoMotor(byte controlPin)
 	this->controlPin = controlPin;
 	this->servo = new Servo;
 	this->servo->attach(controlPin);
-	this->servo->setDirection(SERVO_MOTOR_FRONT);
+	this->setDirection(SERVO_MOTOR_FRONT);
 }
 
 /*
