@@ -1,4 +1,5 @@
 #include "AMADcMotor.h"
+#include "AMADefines.h"
 
 using namespace AMACar;
 
@@ -10,6 +11,7 @@ AMADcMotor::AMADcMotor(byte pwmPin, byte pwmDutyCycle, int busPinsCount, int *bu
 	this->directionBus = new AMAOutputDataBus(busPinsCount, busPinsArray);
     this->pwm = new AMAPWM(pwmPin, pwmDutyCycle);
     this->pwm->generate();
+    this->setMovement(DC_MOTOR_STOP);
 }
 
 /*

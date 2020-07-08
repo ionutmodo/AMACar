@@ -22,8 +22,9 @@ void AMABluetooth::send(String string)
 
 int AMABluetooth::receive(void)
 {
-    if(bluetoothSerial->available())
+	return bluetoothSerial->read();
+    /*if(bluetoothSerial->available())
         return bluetoothSerial->read();
-    return NULL;
+    return NULL;*/
 }
 

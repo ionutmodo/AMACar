@@ -1,4 +1,5 @@
 #include "AMAServoMotor.h"
+#include "AMADefines.h"
 
 using namespace AMACar;
 
@@ -8,8 +9,9 @@ using namespace AMACar;
 AMAServoMotor::AMAServoMotor(byte controlPin)
 {
 	this->controlPin = controlPin;
-	this->servo = new Servo();
+	this->servo = new Servo;
 	this->servo->attach(controlPin);
+	this->servo->setDirection(SERVO_MOTOR_FRONT);
 }
 
 /*
